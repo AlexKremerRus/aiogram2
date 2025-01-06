@@ -8,7 +8,7 @@ import sqlite3
 
 # Удаляем стандартный обработчик
 logger.remove()
-
+API_wealth = '3d9de74844d28377e81415151cbe6a66'
 # Добавляем вывод в консоль
 logger.add(sys.stdout, format="{time} {level} {message}", level="DEBUG")
 # Добавляем запись в файл
@@ -128,6 +128,17 @@ def password(message):
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(telebot.types.InlineKeyboardButton('список пользователей', callback_data='list_persons'))
     bot.send_message(message.chat.id, 'Пользлватель зарегистрирован', reply_markup=markup)
+
+
+@bot.message_handler(commands=['weather'])
+def weathr(message):
+    bot.send_message(message.chat.id, 'привет введите название города пожалуйста')
+
+@bot.message_handler(content_types=['text'])
+def get_weather(message):
+    city = message.text.strip().lower()
+
+
 
 
 @bot.callback_query_handler(func=lambda call: True)
